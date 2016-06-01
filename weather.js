@@ -9,7 +9,7 @@ navigator.geolocation.getCurrentPosition(function(pos) {
       textbody = textbody +
                   data.hourly_forecast[i].FCTTIME.hour_padded + ':' +
                   data.hourly_forecast[i].temp.english + ' ' +
-                  data.hourly_forecast[i].wx.substring(0,9) +
+                  data.hourly_forecast[i].wx.substring(0,11) +
                   '\n';
     }
     simply.body(textbody, true);
