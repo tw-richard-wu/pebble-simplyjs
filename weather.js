@@ -6,7 +6,7 @@ navigator.geolocation.getCurrentPosition(function(pos) {
   var textbody = '';
   ajax({ url: weatherUrl, type: 'json' }, function(data) {
     for (var i = 0; i < 12; i++) {
-      textbody = textbody + \
+      textbody = textbody +
                   data.hourly_forecast[i].FCTTIME.hour_padded + ':' +
                   data.hourly_forecast[i].temp.english + ' ' +
                   data.hourly_forecast[i].wx +
