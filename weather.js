@@ -11,7 +11,7 @@ navigator.geolocation.getCurrentPosition(function(pos) {
                   data.hourly_forecast[i].FCTTIME.hour_padded + ':' +
                   data.hourly_forecast[i].temp.english + ' ' +
                   // data.hourly_forecast[i].wx.substring(0,10).replace('/', ' ') +
-                  data.hourly_forecast[i].icon +
+                  data.hourly_forecast[i].icon.substring(0,10) +
                   '\n';
     }
     simply.body(textbody, true);
