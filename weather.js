@@ -10,7 +10,8 @@ navigator.geolocation.getCurrentPosition(function(pos) {
       textbody = textbody +
                   data.hourly_forecast[i].FCTTIME.hour_padded + ':' +
                   data.hourly_forecast[i].temp.english + ' ' +
-                  data.hourly_forecast[i].wx.substring(0,10).replace('/', ' ') +
+                  // data.hourly_forecast[i].wx.substring(0,10).replace('/', ' ') +
+                  data.hourly_forecast[i].icon +
                   '\n';
     }
     simply.body(textbody, true);
