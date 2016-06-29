@@ -1,5 +1,3 @@
-var hourlyUrl = 'http://api.wunderground.com/api/faa942d410d5139c/hourly/q/' + coords.latitude + ',' + coords.longitude + '.json';
-var forecastUrl = 'http://api.wunderground.com/api/faa942d410d5139c/forecast/q/' + coords.latitude + ',' + coords.longitude + '.json';
 var textbody = '';
 
 function hourlyHandler(data) {
@@ -31,6 +29,8 @@ simply.scrollable(true);
 simply.body('Obtaining position...', true);
 navigator.geolocation.getCurrentPosition(function(pos) {
   var coords = pos.coords;
+  var hourlyUrl = 'http://api.wunderground.com/api/faa942d410d5139c/hourly/q/' + coords.latitude + ',' + coords.longitude + '.json';
+  var forecastUrl = 'http://api.wunderground.com/api/faa942d410d5139c/forecast/q/' + coords.latitude + ',' + coords.longitude + '.json';
   ajax({ url: hourlyUrl, type: 'json', async: false }, hourlyHandler(data));
   textbody = textbody + '\n';
   ajax({ url: forecastUrl, type: 'json', async: false }, forecastHandler(data));
