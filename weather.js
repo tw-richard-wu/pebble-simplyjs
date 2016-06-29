@@ -1,6 +1,12 @@
-var textbody = '';
-
-function hourlyHandler(data) {
+simply.fullscreen(true);
+simply.scrollable(true);
+simply.body('Obtaining position...', true);
+navigator.geolocation.getCurrentPosition(function(pos) {
+  var coords = pos.coords;
+  var hourlyUrl = 'http://api.wunderground.com/api/faa942d410d5139c/hourly/q/' + coords.latitude + ',' + coords.longitude + '.json';
+  var forecastUrl = 'http://api.wunderground.com/api/faa942d410d5139c/forecast/q/' + coords.latitude + ',' + coords.longitude + '.json';
+  var textbody = '';
+  ajax({ url: hourlyUrl, type: 'json', async: false }, function(data) {
     for (var i = 0; i < 12; i++) {
       textbody = textbody +
                   data.hourly_forecast[i].FCTTIME.hour_padded + ':' +
@@ -10,9 +16,9 @@ function hourlyHandler(data) {
                   '\n';
     }
     simply.body(textbody, true);
-}
-
-function forecastHandler(data) {
+  });
+  textbody = textbody + '\n';
+  ajax({ url: forecastUrl, type: 'json', async: false }, function(data) {
     for (var i = 0; i < 3; i++) {
       textbody = textbody +
                   data.forecast.simpleforecast.forecastday[i].date.day + ':' +
@@ -22,16 +28,5 @@ function forecastHandler(data) {
                   '\n';
     }
     simply.body(textbody, false);
-}
-
-simply.fullscreen(true);
-simply.scrollable(true);
-simply.body('Obtaining position...', true);
-navigator.geolocation.getCurrentPosition(function(pos) {
-  var coords = pos.coords;
-  var hourlyUrl = 'http://api.wunderground.com/api/faa942d410d5139c/hourly/q/' + coords.latitude + ',' + coords.longitude + '.json';
-  var forecastUrl = 'http://api.wunderground.com/api/faa942d410d5139c/forecast/q/' + coords.latitude + ',' + coords.longitude + '.json';
-  ajax({ url: hourlyUrl, type: 'json', async: false }, hourlyHandler(data));
-  textbody = textbody + '\n';
-  ajax({ url: forecastUrl, type: 'json', async: false }, forecastHandler(data));
+  });
 });
