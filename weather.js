@@ -15,6 +15,7 @@ navigator.geolocation.getCurrentPosition(function(pos) {
                   data.hourly_forecast[i].icon.replace('mostly', 'm ').replace('partly', 'p ').replace('chance', 'ch ').substring(0,10) +
                   '\n';
     }
+    simply.body(textbody, true);
   });
   textbody = textbody + '\n';
   ajax({ url: forecastUrl, type: 'json' }, function(data) {
@@ -26,6 +27,6 @@ navigator.geolocation.getCurrentPosition(function(pos) {
                   data.forecast.simpleforecast.forecastday[i].icon.replace('mostly', '').replace('partly', '').replace('chance', '').substring(0,10) +
                   '\n';
     }
+    simply.body(textbody, false);
   });
-  simply.body(textbody, true);
 });
